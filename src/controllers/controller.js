@@ -4,9 +4,9 @@ const { Article } = require('../models/model')
 async function createArticle(req, res) {
     try {
         const { title, src, articles, date } = req.body
-        if (!title || !src || !articles ) {
-            return res.status(400).json({ message: "Preencha todos os campos." })
-        }
+        // if (!title || !src || !articles || date ) {
+        //     return res.status(400).json({ message: "Preencha todos os campos." })
+        // }
         const newArticle = await Article.create({ title, src, articles, date })
         res.status(201).json({ message: "Artigo criado com sucesso" })
     } catch (error) {
