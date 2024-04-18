@@ -4,7 +4,7 @@ const { Article } = require('../models/model')
 async function createArticle(req, res) {
     try {
         const { title, src, articles, date } = req.body
-        if (!title || !src || !articles ) {
+        if (!title || !src || !articles || date ) {
             return res.status(400).json({ message: "Preencha todos os campos." })
         }
         const newArticle = await Article.create({ title, src, articles, date })
@@ -12,7 +12,7 @@ async function createArticle(req, res) {
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: "Erro interno de servidor." })
-    }
+    } 
 }
 
 async function getArticles(req, res) {
