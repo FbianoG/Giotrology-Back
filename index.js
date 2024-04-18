@@ -5,7 +5,7 @@ const DataBase = require('./src/dataBase/db.js')
 require('dotenv').config()
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 app.use(cors())
 app.use(express.static('public'))
