@@ -4,7 +4,7 @@ const { Article } = require('../models/model')
 async function createArticle(req, res) {
     try {
         const { title, src, articles, date } = req.body
-        if (!title || !src || !articles || !date ) {
+        if (!title || !src || !articles || !date) {
             return res.status(400).json({ message: "Preencha todos os campos." })
         }
         const newArticle = await Article.create({ title, src, articles, date })
@@ -12,7 +12,7 @@ async function createArticle(req, res) {
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: "Erro interno de servidor." })
-    } 
+    }
 }
 
 async function getArticles(req, res) {
@@ -61,15 +61,16 @@ async function updateArticle(req, res) {
 
 async function deleteArticle(req, res) {
     const { _id } = req.body
+    console.log(req.body);
     try {
-        if (_id) {
+        if (!_id) {
             return res.status(400).json({ message: "Id não identificado." })
         }
         const deleteArticle = await Article.findByIdAndDelete({ _id })
         if (!deleteArticle) {
             return res.status(404).json({ message: "Artigo não encontrado." })
         }
-        return res.status(200).json({ message: "Artigo excluído com sucesso!" })
+        return res.status(200).json({ message: "Artigo excluído com sucesso!", })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: "Erro interno de servidor." })
