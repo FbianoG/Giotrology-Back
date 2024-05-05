@@ -8,7 +8,7 @@ const Article = mongoose.model("Article", {
     title: String,
     date: Date,
     src: String,
-    articles: Array
+    article: Array
 })
 
 

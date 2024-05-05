@@ -3,12 +3,12 @@ const { Article } = require('../models/model')
 
 async function createArticle(req, res) {
     try {
-        const { title, src, articles, date } = req.body
-        if (!title || !src || !articles || !date) {
+        const { title, src, article, date } = req.body
+        if (!title || !src || !article || !date) {
             return res.status(400).json({ message: "Preencha todos os campos." })
         }
-        const newArticle = await Article.create({ title, src, articles, date })
-        res.status(201).json({ message: "Artigo criado com sucesso" })
+        const newArticle = await Article.create({ title, src, article, date })
+        return res.status(201).json({ message: "Artigo criado com sucesso" })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: "Erro interno de servidor." })
@@ -48,11 +48,11 @@ async function updateArticle(req, res) {
         if (!_id, !title || !src || articles) {
             return res.status(400).json({ message: "Preencha todos os campos." })
         }
-        const updateArticle = await Article.findByIdAndUpdate({ _id }, { title, src, articles })
+        // const updateArticle = await Article.findByIdAndUpdate({ _id }, { title, src, articles })
         if (!updateArticle) {
             return res.status(404).json({ message: "Falha ao atualizar artigo." })
         }
-        return res.status(200).json({ message: "Artigo atualizado com sucesso!" })
+        return res.status(200).json({ message: "Artigo atualizado com sucesso!", article: req.body })
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Erro interno de servidor." })
