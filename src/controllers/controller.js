@@ -4,7 +4,7 @@ const { Article } = require('../models/model')
 async function createArticle(req, res) {
     try {
         const { title, src, article, date } = req.body
-        if (!title || !src || !article || !date) {
+        if (!title || !src || !article ) {
             return res.status(400).json({ message: "Preencha todos os campos." })
         }
         const newArticle = await Article.create({ title, src, article, date })
