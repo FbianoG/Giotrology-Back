@@ -3,8 +3,9 @@ const { Article } = require('../models/model')
 
 async function createArticle(req, res) {
     try {
-        const { title, src, article, date } = req.body
-        if (!title || !src || !article ) {
+        const { title, src, article } = req.body
+        const date = new Date()
+        if (!title || !src || !article || !date) {
             return res.status(400).json({ message: "Preencha todos os campos." })
         }
         const newArticle = await Article.create({ title, src, article, date })
@@ -43,12 +44,12 @@ async function getArticle(req, res) {
 }
 
 async function updateArticle(req, res) {
-    const { _id, title, src, articles, } = req.body
+    const { _id, title, src, article, } = req.body
     try {
-        if (!_id, !title || !src || articles) {
+        if (!_id, !title || !src || !article) {
             return res.status(400).json({ message: "Preencha todos os campos." })
         }
-        // const updateArticle = await Article.findByIdAndUpdate({ _id }, { title, src, articles })
+        const updateArticle = await Article.findByIdAndUpdate({ _id }, { title, src, article })
         if (!updateArticle) {
             return res.status(404).json({ message: "Falha ao atualizar artigo." })
         }
@@ -61,7 +62,6 @@ async function updateArticle(req, res) {
 
 async function deleteArticle(req, res) {
     const { _id } = req.body
-    console.log(req.body);
     try {
         if (!_id) {
             return res.status(400).json({ message: "Id não identificado." })
